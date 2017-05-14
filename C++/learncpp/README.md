@@ -60,3 +60,83 @@
     - `#ifndef`
       - opposite of `#ifdef` - can check whether a value has NOT been previously `#defined`
     - `#endif`
+
+## Chapter 2
+Fundamental Data Types:
+
+| Category       | Type        | Minimum Size |
+| -------------- | ----------- | ------------ |
+| boolean        | bool        | 1 byte       |
+| character      | char        | 1 byte       |
+|                | wchar_t     | 1 byte       |
+|                | char16_t    | 2 bytes      |
+|                | char32_t    | 4 bytes      |
+| floating point | float       | 4 bytes      |
+|                | double      | 8 bytes      |
+|                | long double | 8 bytes      |
+| integer        | short       | 2 bytes      |
+|                | int         | 2 bytes      |
+|                | long        | 4 bytes      |
+|                | long long   | 8 bytes      |
+| void           | no type     | -            |
+
+- variable initialization
+  - copy initialization: `int nValue = 5;`
+  - direct initialization: `int nValue(5);`
+    - favored over copy initialization
+  - uniform initialization in C++11: `int value{5};` or `int value{} // default initialization`
+    - disallowing "narrowing" type conversions
+- variable assignment
+  - copy assignment
+- integers
+  - signed integer can hold both positive and negative numbers
+    - `signed int i`
+  - unsigned integer can only hold positive values
+    - `unsigned int i`
+  - all integer variables except char are signed by default
+  - C++ only guarantees that integer variables will have a minimum size, but can be larger depending on target system
+
+Fixed Width Integers (found in cstdint)
+
+| Name | Type | Range | Notes |
+| ---- | ---- | ----- | ----- |
+| int8_t | 1 byte signed | -128 to 127 | treated like a signed char on many systems |
+| uint8_t | 1 byte unsigned | 0 to 255 | treated like an unsigned char on many systems |
+| int16_t | 2 byte signed | -32,768 to 32,767 | |
+| uint16_t | 2 byte unsigned | 0 to 65,535 | |
+| int32_t | 4 byte signed | | |
+| uint32_t | 4 byte unsigned | | |
+| int64_t | 8 byte signed | | |
+| uint64_t | 8 byte unsigned | | |
+
+- floating point numbers
+  - always signed
+  - f suffix means float and not double (double by default)
+  - std::cout has a default precision of 6
+    - override by using `std::setprecision()` function defined in a header file called iomanip
+  - in C++, 87 and 87.000 are treated as exactly the same
+  - rounding errors b/c of the differences between binary and decimal numbers (esp fractions)
+  - `INF` - infinity
+  - `NaN` - "Not a Number"
+  - `IND` - indeterminate
+- boolean values
+  - true evaluates to the integer 1, false evaluates to the integer 0
+    - use `std::boolalpha` to print booleans as true/false instead of 1/0; `std::noboolalpha` to turn off
+- characters
+  - can initialize with both integer value and the character
+  - static cast - between fundamental data types
+    - `static_cast<new_type>(expression)`
+- literals - values inserted directly into the code
+  - string literals are weird
+- constants - add const before or after type (before type is better)
+  - `const double gravity { 9.8 }`
+  - must be initialized at declaration
+  - runtime constant - initialization values can only be resolved at runtime
+  - compile-time constants - initialization values resolved at compile-time
+  - some cases where C++ requires a compile-time constant instead of a run-time constant -> `constexpr` ensures that the constant must be a compile-time constant
+  - avoid using #define to create symbolic constants
+    - create a header file to hold constants
+    - inside header file, declare a namespace
+    - add all constants inside namespace
+    - #include header file whenever you need it
+    - use `::` to access constants in .cpp files
