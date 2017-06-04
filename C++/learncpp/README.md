@@ -193,5 +193,23 @@ Bitwise Operators
 - bit flags
   - useful for when you have many sets of identical bitflags
   - good for backward compatibility
+  - see std::bitset - C++ standard library
 - bit masks
   - group bit flags
+
+## Chapter 4
+- scope - where a variable is accessible
+- duration - when a variable is created and destroyed
+- global variables
+  - global scope operator (::) can be used to tell the compiler you mean global version instead of the local version
+    - by convention, global variable names prefixed with "g_"
+  - linkage - determines whether multiple instances of an identifier refer to the same variable or not
+    - no linkage - can only be referred to from the limited scope it exists in (e.g. normal local variables)
+    - internal variable (static variable) - variable with internal linkage
+      - can be used anywhere within the file they are defined in, but can not be referenced outside the file they exist in
+      - `static` keyword: e.g. `static int g_x`
+      - constant variables declared outside of a block are assumed to be internal
+    - external variable - variable with external linkage
+      - can be used both in the file they are defined in, as well as in other files
+      - `extern` keyword: e.g. `extern double g_y(9.8)`
+      - non-const globals have external linkage by default

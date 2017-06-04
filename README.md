@@ -1,5 +1,4 @@
 # notes
-an amalgamation of all my notes
 not complete, but feel free to poke around
 
 ## to read
