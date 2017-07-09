@@ -22,5 +22,4 @@
 5. the distribution question - do you have a way to not just create but deliver your product?
 6. the durability question - will your market position be defensible 10 and 20 years into the future?
 7. the secret question - have you identified a unique opportunity that others don't see
-
 - customers won't care about any particular technology unless it solves a particular problem in a superior way
