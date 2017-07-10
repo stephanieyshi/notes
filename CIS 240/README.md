@@ -103,3 +103,90 @@
   - an explicit specification of what determines each external output value
 
 #### 3.6.4 An Example: The Complete Implementation of a Finite State Machine
+
+## 4 The von Neumann Model
+### 4.1 Basic Components
+- instruction - smallest piece of work specified in a computer program
+  - computer does not have the luxury of carrying out a piece of an instruction
+- von Neumann model: memory, processing unit, input, output, and a control unit
+
+#### 4.1.1 Memory
+- typical memory of today's (well in 2005) computer system is 2^28 by 8 bits
+- to read the contents of a memory location, we first place the address of that location in the memory's address register (MAR), and then interrogate the computer's memory
+- info stored in the location having that address will be placed in the memory's data register (MDR)
+- to write (or store) a value in a memory location, we first write the address of the memory location in the MAR, and then value to be stored in the MDR
+- then interrogate the computers memory with the Write Enable signal asserted
+- info contained in the MDR will be written into the memory location whose address is in the MAR
+
+#### 4.1.2 Processing Unit
+- carries out actual processing of information in the computer
+  - can consist of many sophisticated complex functional units
+- ALU (Arithmetic and Logic Unit) - simplest processing unit
+  - capable of performing basic arithmetic and basic logic operations
+  - word length - size of the quantities normally processed by the ALU
+  - word - each element
+- almost all computers have temporary storage to avoid the unnecessarily longer access time that would be necessary when it came time to multiply
+  - most common form - set of registers
+
+#### 4.1.3 Input and Output
+- peripherals - devices that exist for the purposes of input and output
+- LC-3: input - keyboard, output - monitor
+
+#### 4.1.4 Control Unit
+- control unit in charge of making all the other parts play together
+  - keeps track of both where we are within the process of executing the program and where we are in the process of executing each instruction
+- instruction register - keeps track of which instruction is being executed
+- program counter (PC) - keeps track of which instruction is to be processed next
+  - "instruction pointer"
+
+### 4.3 Instruction Processing
+- central idea in the von Neumann model of computer processing is that the program and data are both stored as sequences of bits in the computer's memory, and the program is executed one instruction at a time under the direction of the control unit
+
+#### 4.3.1 The Instruction
+- instruction is made of the opcode (what the instruction does) and the operands (who it is to do it to)
+
+#### 4.3.2 The Instruction Cycle
+- fetch, decode, evaluate address, fetch operands, execute, store result
+- FETCH
+  - obtains next instruction from memory and loads it into the instruction register (IR) of the control unit
+  - step 1: load the MAR with the contents of the PC, and simultaneously increment the PC
+  - step 2: interrogate memory, resulting in the instruction being placed in the MDR
+  - step 3: load the IR with the instructions of the MDR
+  - amount of time taken by each machine cycle is one clock cycle
+- DECODE
+  - examines instruction in order to figure out what the microarchitecture is being asked to do
+  - LC-3: 4-to-16 decoder
+- EVALUATE ADDRESS
+  - computes the address of the memory location needed to process the instruction
+- FETCH OPERANDS
+  - obtains the source operands needed to process the instruction
+- EXECUTE
+  - carries out execution of the instruction
+- STORE RESULT
+  - result is written to its designated destination
+
+### 4.4 Changing the Sequence of the Execution
+- operate instruction - processes data
+- data movement instruction - moves data from one place to another
+- control instruction - changes the sequence of instruction execution
+  - if we wish to change the sequence of instructions executed, we must change the PC between the time it is incremented (during the FETCH phase of one instruction) and the start of the FETCH phase of the next
+
+### 4.5 Stopping the Computer
+- instruction cycle continues whether a user program is being processed or the operating system is being processed
+- stopping instruction cycle requires stopping the clock
+  - clock generator is a crystal oscillator
+  - if RUN latch is in 1 state (Q = 1), the output of the clock circuit is the same as the output of the clock generator
+  - if the RUN latch is in the 0 state, the output of the clock circuit is 0
+
+## 5 The LC-3
+### 5.1 The ISA: Overview
+- ISA specifies everything in the computer that is available to a programmer when he/she writes programs in the computer's own machine language
+- ISA also specifies everything in the computer that is available to someone who wishes to translate programs written in a high-level language like C or Pascal or Fortran or COBOL into the machine language of the computer
+
+#### 5.1.1 Memory Organization
+- LC-3 memory has an address space of 2^16 locations
+- addressability of 16 bits
+
+#### 5.1.2 Registers
+- general purpose register set
+  - each register in the set is called a general purpose register (GPR)
