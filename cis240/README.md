@@ -1,4 +1,4 @@
-# Introduction to Computing systems
+# Introduction to Computing Systems
 
 ## 3 Digital Logic Structures
 ### 3.1 The Transistor
